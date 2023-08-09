@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-from .models import Game
-from .serializers import GameSerializer
+from .models import Game, Studio
+from .serializers import GameSerializer, StudioSerializer
 
 
 
@@ -11,3 +11,8 @@ def games_list(request):
     data = serializer.data
     return JsonResponse(data, safe=False)
 
+def studios_list(request):
+    studio_lst = Studio.objects.all()
+    serializer = StudioSerializer(studio_lst, many=True)
+    data = serializer.data
+    return JsonResponse(data, safe=False)
